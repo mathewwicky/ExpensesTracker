@@ -10,38 +10,37 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-
-
   int _selectIndex = 0;
-  final List<Widget> _screens =[
+  final List<Widget> _screens = [
     Homescreens(),
     Expensescreen(),
-    Settingscreen()
+    Settingscreen(),
   ];
 
-  void _onItemTaped(int index){
+  void _onItemTaped(int index) {
     setState(() {
       _selectIndex = index;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(title: Text("Welcome"),),
       body: _screens[_selectIndex],
-      
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectIndex,
         onTap: _onItemTaped,
         items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),  
-                BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Expenses'),
-                        BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings') 
-  
-
-      ],),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Expenses'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+      ),
     );
   }
 }
@@ -51,6 +50,11 @@ class Homescreens extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Home'),);
+    return Scaffold(
+      appBar: AppBar(title: Text("Home"),),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.pushNamed(context, '/addexpense');
+      } , child: Icon(Icons.add),),
+    );
   }
 }

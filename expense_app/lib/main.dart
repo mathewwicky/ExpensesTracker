@@ -1,3 +1,4 @@
+import 'package:expense_app/screens/add_expensescreen.dart';
 import 'package:expense_app/screens/expensescreen.dart';
 import 'package:expense_app/screens/homescreen.dart';
 import 'package:expense_app/screens/settingscreen.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
                '/': (context) => Homescreen(),
                '/expensescreen': (context) => Expensescreen(),
                '/settingscreen': (context) => Settingscreen(),
+               '/addexpense': (context) => AddExpensescreen(),
                
       },
     );
