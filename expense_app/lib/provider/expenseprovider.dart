@@ -4,7 +4,7 @@ import 'package:expense_app/model/expense.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 
-class Expenseprovider with ChangeNotifier{
+class ExpenseProvider with ChangeNotifier{
 
   final LocalStorage storage;
 
@@ -12,7 +12,7 @@ class Expenseprovider with ChangeNotifier{
 
   List<Expense> get expenses => _expenses;
 
-  Expenseprovider(this.storage){
+  ExpenseProvider(this.storage){
     _loadExpensesFromStorage();
   }
 

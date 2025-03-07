@@ -1,5 +1,6 @@
 import 'package:expense_app/screens/expensescreen.dart';
 import 'package:expense_app/screens/settingscreen.dart';
+//import 'package:expense_app/screens/settingscreen.dart';
 import 'package:flutter/material.dart';
 
 class Homescreen extends StatefulWidget {
@@ -14,6 +15,7 @@ class _HomescreenState extends State<Homescreen> {
   final List<Widget> _screens = [
     Homescreens(),
     Expensescreen(),
+    //CategoryManagementScreen(),
     Settingscreen(),
   ];
 
@@ -37,7 +39,7 @@ class _HomescreenState extends State<Homescreen> {
           BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Expenses'),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Settings',
+            label: 'Manage',
           ),
         ],
       ),

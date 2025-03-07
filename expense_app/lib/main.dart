@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
                '/expensescreen': (context) => Expensescreen(),
                '/settingscreen': (context) => Settingscreen(),
                '/addexpense': (context) => AddExpensescreen(),
+              // '/categorymanagement': (context) => CategoryManagementScreen(),
                
       },
     );
