@@ -57,4 +57,16 @@ class ExpenseProvider with ChangeNotifier {
     _saveExpensesToStorage();
     notifyListeners();
   }
+//debug to print out the preference storage
+  void debugPrintStoredExpenses() async {
+  final prefs = await SharedPreferences.getInstance();
+  final storedExpenses = prefs.getString("expenses");
+
+  if (storedExpenses != null) {
+    print("Stored Expenses JSON:\n$storedExpenses");
+  } else {
+    print("No expenses found in SharedPreferences.");
+  }
+}
+
 }

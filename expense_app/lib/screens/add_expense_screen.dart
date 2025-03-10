@@ -138,11 +138,14 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                                     ? _tagController.text
                                     : null,
                             decoration: InputDecoration(
+                              
                               hintText: "Select Tag",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
+                              contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                             ),
+                            isExpanded: true,
                             items:
                                 tagProvider.tags.map((tag) {
                                   return DropdownMenuItem<String>(

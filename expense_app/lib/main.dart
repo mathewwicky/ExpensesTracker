@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => TagProvider(),),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
           '/': (context) => Homescreen(),

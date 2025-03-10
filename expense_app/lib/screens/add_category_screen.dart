@@ -14,6 +14,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       appBar: AppBar(title: Text("Manage Category")),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
