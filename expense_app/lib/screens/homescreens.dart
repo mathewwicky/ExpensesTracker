@@ -1,7 +1,65 @@
+import 'package:expense_app/screens/expensescreen.dart';
+import 'package:expense_app/screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_app/provider/expense_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:expense_app/models/expense.dart';
+
+
+
+class Homescreen extends StatefulWidget {
+  const Homescreen({super.key});
+
+  @override
+  State<Homescreen> createState() => _HomescreenState();
+}
+
+class _HomescreenState extends State<Homescreen> {
+  int _selectIndex = 0;
+  final List<Widget> _screens = [
+    Homescreens(),
+    Expensescreen(),
+    Settingscreen(),
+  ];
+
+  void _onItemTaped(int index) {
+    setState(() {
+      _selectIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      
+      // appBar: AppBar(title: Text("Welcome"),),
+      body: _screens[_selectIndex],
+
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectIndex,
+        onTap: _onItemTaped,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Expenses'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+      ),
+    );
+  }
+  // debug to show the Json data
+//   @override
+// void initState() {
+//   super.initState();
+//   Future.delayed(Duration.zero, () {
+//     Provider.of<ExpenseProvider>(context, listen: false)
+//         .debugPrintStoredExpenses();
+//   });
+// }
+
+}
 
 class Homescreens extends StatelessWidget {
   const Homescreens({super.key});

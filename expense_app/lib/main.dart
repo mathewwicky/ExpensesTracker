@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: '/',
         routes: {
-          '/': (context) => Homescreens(),
+          '/': (context) => Homescreen(),
           '/expensescreen': (context) => Expensescreen(),
           '/settingscreen': (context) => Settingscreen(),
           '/addexpense': (context) => AddExpenseScreen(),
