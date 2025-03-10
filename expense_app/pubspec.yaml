@@ -38,6 +38,7 @@ dependencies:
   provider: ^6.1.2
   collection: ^1.19.1
   localstorage: ^5.0.0
+  shared_preferences: ^2.5.2
 
 dev_dependencies:
   flutter_test:

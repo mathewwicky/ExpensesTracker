@@ -1,7 +1,6 @@
-import 'package:expense_app/screens/expensescreen.dart';
-import 'package:expense_app/screens/settingscreen.dart';
-//import 'package:expense_app/screens/settingscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:expense_app/screens/expensescreen.dart';
+import 'settings.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -39,7 +38,7 @@ class _HomescreenState extends State<Homescreen> {
           BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Expenses'),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Manage',
+            label: 'Settings',
           ),
         ],
       ),

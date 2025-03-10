@@ -1,23 +1,25 @@
-
-import 'package:expense_app/models/expense.dart';
-import 'package:expense_app/provider/expenseprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:expense_app/models/expense.dart';
+import 'package:expense_app/provider/category_provider.dart';
+import 'package:expense_app/provider/expense_provider.dart';
+import 'package:expense_app/provider/tag_provider.dart';
 import 'package:provider/provider.dart';
 
-class AddExpensescreen extends StatefulWidget {
-  const AddExpensescreen({super.key});
+class AddExpenseScreen extends StatefulWidget {
+  const AddExpenseScreen({super.key});
 
   @override
-  State<AddExpensescreen> createState() => _AddExpensescreenState();
+  State<AddExpenseScreen> createState() => _AddExpenseScreenState();
 }
 
-class _AddExpensescreenState extends State<AddExpensescreen> {
+class _AddExpenseScreenState extends State<AddExpenseScreen> {
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _categoryIdController = TextEditingController();
   final TextEditingController _payeeController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _tagController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,35 +82,83 @@ class _AddExpensescreenState extends State<AddExpensescreen> {
                       TextField(
                         controller: _dateController,
                         decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.calendar_today),
                           hintText: "Enter Date",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        onTap: () {
+                          _selectDate();
+                        },
                       ),
                       SizedBox(height: 6),
                       Text("Category"),
-                      SizedBox(height: 6),
-                      TextField(
-                        controller: _categoryIdController,
-                        decoration: InputDecoration(
-                          hintText: "Select Category",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
+
+                      Consumer<CategoryProvider>(
+                        builder: (context, categoryProvider, child) {
+                          return DropdownButtonFormField<String>(
+                            value:
+                                _categoryIdController.text.isNotEmpty
+                                    ? _categoryIdController.text
+                                    : null,
+                            decoration: InputDecoration(
+                              hintText: "Select Category",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            items:
+                                categoryProvider.categories.map((category) {
+                                  return DropdownMenuItem<String>(
+                                    value:
+                                        category
+                                            .name, // You can use tag.id if needed
+                                    child: Text(category.name),
+                                  );
+                                }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                _categoryIdController.text =
+                                    value!; // Save selected tag
+                              });
+                            },
+                          );
+                        },
                       ),
                       SizedBox(height: 6),
                       Text("Tag"),
                       SizedBox(height: 6),
-                      TextField(
-                        controller: _tagController,
-                        decoration: InputDecoration(
-                          hintText: "Select Tag",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
+
+                      Consumer<TagProvider>(
+                        builder: (context, tagProvider, child) {
+                          return DropdownButtonFormField<String>(
+                            value:
+                                _tagController.text.isNotEmpty
+                                    ? _tagController.text
+                                    : null,
+                            decoration: InputDecoration(
+                              hintText: "Select Tag",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            items:
+                                tagProvider.tags.map((tag) {
+                                  return DropdownMenuItem<String>(
+                                    value:
+                                        tag.name, // You can use tag.id if needed
+                                    child: Text(tag.name),
+                                  );
+                                }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                _tagController.text =
+                                    value!; // Save selected tag
+                              });
+                            },
+                          );
+                        },
                       ),
                       SizedBox(height: 20),
 
@@ -139,6 +189,21 @@ class _AddExpensescreenState extends State<AddExpensescreen> {
     );
   }
 
+  // date picker in the add expense form
+  Future<void> _selectDate() async {
+    DateTime? _pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (_pickedDate != Null) {
+      setState(() {
+        _dateController.text = _pickedDate.toString().split(" ")[0];
+      });
+    }
+  }
+
   void _saveExpense(BuildContext context) {
     final expense = Expense(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -151,7 +216,8 @@ class _AddExpensescreenState extends State<AddExpensescreen> {
     );
 
     Provider.of<ExpenseProvider>(context, listen: false).addExpenses(expense);
-    Navigator.pop(context);
+    // Navigator.pop(context);
+    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
   @override

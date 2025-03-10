@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:expense_app/model/expense.dart';
+import 'package:expense_app/models/expense.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 
@@ -16,7 +16,6 @@ class ExpenseProvider with ChangeNotifier{
     _loadExpensesFromStorage();
   }
 
-// load data from a local storage
 void _loadExpensesFromStorage() {
 
 var storedExpenses = storage.getItem('expenses');
