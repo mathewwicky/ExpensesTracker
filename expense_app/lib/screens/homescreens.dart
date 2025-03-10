@@ -11,6 +11,10 @@ class Homescreens extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        drawer: Drawer(
+          child: ListView(children: [Text("Manage Category"),
+          Text("Manage Tags")],),
+        ),
         appBar: AppBar(
           title: Text(
             "Expense App",
